@@ -2,6 +2,7 @@
 
 // Variadic templates
 // std::tuple
+
 // parameter pack - упаковка параметров
 
 
