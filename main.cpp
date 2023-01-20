@@ -1,28 +1,40 @@
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <tuple>
-#include "PrintTuple.h"
+#include <typeinfo>
+
+#include "Parser.h"
+#include "Exceptions.h"
 
 // Variadic templates
 // std::tuple
 // parameter pack - упаковка параметров
 
 
-using namespace std;
-
-
-template <class... Args>
-void print(Args... args) { }
-
-
-template <class Head, class... Args>
-void print(Head head, Args... args) {
-    cout << head << endl;
-    print(args...);
-}
-
-int main() {
-    auto super_tuple = std::tuple_cat(std::make_tuple(1,2,3), std::make_tuple(4,5,6));
-    std::cout << super_tuple << std::endl;
+int main(int argc, char **argv) {
+    if(*argv[1] == '\\')
+        *argv[1] = '\n';
+    try {
+        if (argc < 3) {
+            throw Exceptions("Too few program arguments", bad_program_arguments);
+        }
+        std::ifstream file("test.csv");
+        if (!file.is_open()) {
+            throw Exceptions("no csv file!", bad_file);
+        }
+        std::string curString;
+        std::getline(file, curString);
+        std::tuple<std::string, short, long, int, double, double, double, double, int> tuple;
+        Parser<std::string, short, long, int, double, double, double, double, int> parser(argv, file);
+        for (Parser<std::string, short, long, int, double, double, double, double, int> &it: parser) {
+            std::cout << it;
+            std::cout << std::endl;
+        }
+    }
+    catch (const Exceptions& ex) {
+        std::cerr << ex.whatReason() << std::endl;
+        return ex.returnCode();
+    }
     return 0;
 }

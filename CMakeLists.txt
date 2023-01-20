@@ -3,4 +3,4 @@ project(csvParser)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(csvParser main.cpp PrintTuple.h)
+add_executable(csvParser main.cpp PrintTuple.h Parser.h Exceptions.h Exceptions.cpp)
