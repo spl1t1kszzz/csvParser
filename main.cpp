@@ -13,6 +13,7 @@
 
 
 int main(int argc, char **argv) {
+
     if(*argv[1] == '\\')
         *argv[1] = '\n';
     try {
@@ -25,7 +26,6 @@ int main(int argc, char **argv) {
         }
         std::string curString;
         std::getline(file, curString);
-        std::tuple<std::string, short, long, int, double, double, double, double, int> tuple;
         Parser<std::string, short, long, int, double, double, double, double, int> parser(argv, file);
         for (Parser<std::string, short, long, int, double, double, double, double, int> &it: parser) {
             std::cout << it;
