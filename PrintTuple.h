@@ -10,38 +10,12 @@ struct int_ {
 
 template<class Tuple, typename Ch, typename Tr>
 std::ostream &print_tuple(std::basic_ostream<Ch, Tr> &out, const Tuple &t, int_<1>) {
-//    auto elem = std::get<std::tuple_size<Tuple>::value - 1>(t);
-//    std::string elemType = typeid(elem).name();
-//    if (elemType.find("string") != std::string::npos) {
-//        std::ostringstream str;
-//        str << elem;
-//        std::string stringElem = str.str();
-//        for (auto& i: stringElem) {
-//            if (i == '`')
-//                i = ' ';
-//        }
-//        return out << stringElem;
-//    }
     return out << std::get<std::tuple_size<Tuple>::value - 1>(t);
 }
 
 template<class Tuple, typename Ch, typename Tr, std::size_t Pos>
 std::ostream &print_tuple(std::basic_ostream<Ch, Tr> &out, const Tuple &t, int_<Pos>) {
-//    auto elem = std::get<std::tuple_size<Tuple>::value - Pos>(t);
-//    std::string elemType = typeid(elem).name();
-//    if (elemType.find("string") != std::string::npos) {
-//        std::ostringstream str;
-//        str << elem;
-//        std::string stringElem = str.str();
-//        for (auto& i: stringElem) {
-//            if (i == '`')
-//                i = ' ';
-//        }
-//        out << stringElem << ", ";
-//    }
-//    else {
         out << std::get<std::tuple_size<Tuple>::value - Pos>(t) << ", ";
-    //}
     return print_tuple(out, t, int_<Pos - 1>());
 }
 

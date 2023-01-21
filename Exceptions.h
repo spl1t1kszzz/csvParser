@@ -11,6 +11,8 @@ enum {
     bad_program_arguments,
     small_csv_file,
     bad_skip,
+    bad_shield,
+    bad_line,
 };
 
 
